@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <form action="{% url 'add_stock' %}" class="form-inline my-2 my-lg-0" method="POST">
+        {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Entre o Ticker da Ação" aria-label="Search" name="ticker">
+      <button class="btn btn-secondary" type="submit">Adicionar ao Portfolio</button>
+    </form>
+
+ <br/>
+
+ {%for item in ticker%}
+ 	{{item}} - <a href="{% url 'delete' item.id %}">excluir</a><br/>
+  {%endfor%}
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if asset_profile %}
+
+	{% if api == 'Erro, tente novamente'%}
+
+		Ocorreu um erro na solicitação, por favor, tente novamente.
+
+	{% else %}
+
+		<h1>{{stock_name}} - {{stock}} </h1><br/>
+		Sobre: {{ asset_profile.longBusinessSummary }}<br/>
+		País: {{ asset_profile.country }}<br/>
+		Indústria: {{ asset_profile.industry }}<br/>
+		Setor: {{ asset_profile.sector }}<br/>
+		Site: {{ asset_profile.website }}<br/><br/>
+		Dados Históricos:<br/><br/>
+
+
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Data</th>
+      <th scope="col">Abertura</th>
+      <th scope="col">Máxima</th>
+      <th scope="col">Mínima</th>
+      <th scope="col">Fechamento</th>
+      <th scope="col">Volume</th>
+      <th scope="col">Dividendos</th>
+      <th scope="col">Split</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{%for data in all_data %}
+    	<tr>
+	      	<th scope="row">{{data.Date}}</th>
+		    <td>{{data.Open}}</td>
+		    <td>{{data.High}}</td>
+		    <td>{{data.Low}}</td>
+		    <td>{{data.AdjClose}}</td>
+		    <td>{{data.Volume}}</td>
+		    <td>{{data.DivAmt}}</td>
+		    <td>{{data.Split}}</td>
+    	</tr>
+    {%endfor%}
+  </tbody>
+</table>
+
+	{% endif %}
+
+{% endif %}
+
+
+{% endblock %}
